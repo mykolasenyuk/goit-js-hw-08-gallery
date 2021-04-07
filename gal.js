@@ -30,7 +30,9 @@ imgList.insertAdjacentHTML("afterbegin", makeImgListRows);
 imgList.addEventListener('click',onImgListClick)
 
 function onImgListClick(e) {
-  console.log(e.currentTarget);
+  // console.log(e.currentTarget);
+   e.preventDefault();
+  // document.body.style.overflow = 'hidden';
   const isImgListSwach = e.target.classList.contains('gallery__image')
   if (!isImgListSwach) {
     return;
