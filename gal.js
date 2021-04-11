@@ -24,11 +24,9 @@ const makeImgListMarkup = image => {
 </li>`
 };
 
-
 const makeImgListRows = images.map(makeImgListMarkup).join('');
 
 imgList.insertAdjacentHTML("afterbegin", makeImgListRows);
-
 imgList.addEventListener('click', onImgListClick);
 lightbox.addEventListener('click',onModalCloseBtn)
 
@@ -40,11 +38,8 @@ function onImgListClick(e) {
     return;
   }
  
-
 addLightboxClass()
-
- addImageAtributes(e)
-
+addImageAtributes(e)
 };
 
 function onModalCloseBtn(e) {
@@ -54,7 +49,6 @@ function onModalCloseBtn(e) {
   if (onOverlayCloseBtn) {
     removeLightboxClass();
     removeImageAtributes()
-
   }
 }
 
@@ -65,20 +59,24 @@ function addImageAtributes(atribut) {
   // console.log(lightboxImage)
   // console.log(atribut.target)
 };
+
 // очищає атрибути src i alt
 function removeImageAtributes() {
   lightboxImage.src = "";
   lightboxImage.alt = "";
 };
+
 // додає клас модалці
 function addLightboxClass() {
-  
   lightbox.classList.add('is-open');
-  window.addEventListener('keydown', OnEscKeyPress)
+  window.addEventListener('keydown', OnEscKeyPress);
+  window.addEventListener('keydown', changeOriginImageByKeys);
 };
+
 // видаляє клас модалці
 function removeLightboxClass() {
-  window.removeEventListener('keydown',OnEscKeyPress)
+  window.removeEventListener('keydown', OnEscKeyPress);
+   window.removeEventListener('keydown',changeOriginImageByKeys)
   lightbox.classList.remove('is-open');
 }
 
@@ -87,16 +85,45 @@ function removeLightboxClass() {
 lightboxOverlay.addEventListener('click', onOverlayClick);
 function onOverlayClick(evt) {
   if (evt.currentTarget === evt.target) {
-removeLightboxClass() 
-    
+    removeLightboxClass();
+    removeImageAtributes()
   } 
 }
+
 // закриття модалки по ESC
 function OnEscKeyPress(evt) {
- 
   if (evt.code === 'Escape') {
-    removeLightboxClass()
+    removeLightboxClass();
+    removeImageAtributes();
+     console.log(evt.code)
   }
-  //  console.log(evt.code)
-  
+}
+// переключає картинки при нажиманні на ArrowLeft і ArrowRight
+  let currentImg = 0
+function changeOriginImageByKeys(evt) {
+  const onArrowRight = evt.code === "ArrowRight"
+  const onArrowLeft = evt.code === "ArrowLeft"
+  if (!onArrowRight && !onArrowLeft) {
+    return;
+  }
+  if (onArrowRight) {
+    currentImg += 1;
+  }
+  if (onArrowLeft) {
+    currentImg -= 1;
+  }
+  // з
+  if (currentImg > images.length - 1) {
+    currentImg = 0;
+  };
+  if (currentImg < 0) {
+    currentImg=images.length-1
+  }
+    setModalImg(currentImg)
+  // console.log(currentImg)
+}
+function setModalImg(index) {
+  // console.log(images[index]);
+  const oriImg = images[index]
+  lightboxImage.src = oriImg.original
 }
