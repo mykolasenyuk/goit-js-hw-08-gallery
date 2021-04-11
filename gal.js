@@ -32,7 +32,7 @@ lightbox.addEventListener('click',onModalCloseBtn)
 
 function onImgListClick(e) {
    e.preventDefault();
-  // document.body.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
   const isImgListSwach = e.target.classList.contains('gallery__image')
   if (!isImgListSwach) {
     return;
