@@ -1,5 +1,10 @@
 import images from "./gallery-items.js"
-console.log(images);
+
+const imgList = document.querySelector('.js-gallery');
+const lightbox = document.querySelector('.js-lightbox');
+const lightboxImage = document.querySelector('img.lightbox__image');
+const lightboxOverlay = document.querySelector('.lightbox__overlay');
+const lightboxCloseBtn= document.querySelector('button[data-action="close-lightbox"]')
 
 const makeImgListMarkup = image => {
     // console.log(image)
@@ -13,53 +18,85 @@ const makeImgListMarkup = image => {
       src="${image.preview}"
       data-source="${image.original}"
       alt="${image.description}"
+       loading="lazy"
     />
   </a>
 </li>`
 };
-// console.log(makeImgListMarkup)
-const imgList = document.querySelector('.js-gallery');
-// console.log(imgList);
+
 
 const makeImgListRows = images.map(makeImgListMarkup).join('');
-// console.log(makeImgListRows);
 
 imgList.insertAdjacentHTML("afterbegin", makeImgListRows);
 
-
-imgList.addEventListener('click',onImgListClick)
+imgList.addEventListener('click', onImgListClick);
+lightbox.addEventListener('click',onModalCloseBtn)
 
 function onImgListClick(e) {
-  // console.log(e.currentTarget);
    e.preventDefault();
   // document.body.style.overflow = 'hidden';
   const isImgListSwach = e.target.classList.contains('gallery__image')
   if (!isImgListSwach) {
     return;
   }
+ 
 
-  const cuurentImage = document.querySelector('.js-lightbox.is-open');
-  if (cuurentImage) {
-    cuurentImage.classList.remove('is-open')
+addLightboxClass()
+
+ addImageAtributes(e)
+
+};
+
+function onModalCloseBtn(e) {
+  // const onLightboxOverlay = e.target === lightboxOverlay;
+  const onOverlayCloseBtn = e.target === lightboxCloseBtn;
+  // console.log(e.currentTarget)
+  if (onOverlayCloseBtn) {
+    removeLightboxClass();
+    removeImageAtributes()
+
   }
-
-  console.log(e.target.dataset.source);
-
-  const lightbox = document.querySelector('.js-lightbox')
-
-  console.log(lightbox)
-
-  lightbox.classList.add('is-open');
-
-  const lightboxImage = document.querySelector('img.lightbox__image');
-  
-  console.log(lightboxImage)
-  lightboxImage.src = `${e.target.dataset.source}`;
-  lightboxImage.alt = `${e.target.alt}`
-
 }
-// function setImageAtributes(atribute) {
-//   lightboxImage.src = atribute;
-//   lightboxImage.alt = atribute
+
+// додає атрибути src i alt
+function addImageAtributes(atribut) {
+  lightboxImage.src = `${atribut.target.dataset.source}`;
+  lightboxImage.alt = `${atribut.target.alt}`
+  // console.log(lightboxImage)
+  // console.log(atribut.target)
+};
+// очищає атрибути src i alt
+function removeImageAtributes() {
+  lightboxImage.src = "";
+  lightboxImage.alt = "";
+};
+// додає клас модалці
+function addLightboxClass() {
   
-// }
+  lightbox.classList.add('is-open');
+  window.addEventListener('keydown', OnEscKeyPress)
+};
+// видаляє клас модалці
+function removeLightboxClass() {
+  window.removeEventListener('keydown',OnEscKeyPress)
+  lightbox.classList.remove('is-open');
+}
+
+
+// закриває модалку при кліку на lightboxOverlay
+lightboxOverlay.addEventListener('click', onOverlayClick);
+function onOverlayClick(evt) {
+  if (evt.currentTarget === evt.target) {
+removeLightboxClass() 
+    
+  } 
+}
+// закриття модалки по ESC
+function OnEscKeyPress(evt) {
+ 
+  if (evt.code === 'Escape') {
+    removeLightboxClass()
+  }
+  //  console.log(evt.code)
+  
+}

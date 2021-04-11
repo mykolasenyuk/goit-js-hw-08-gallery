@@ -62,5 +62,47 @@ export default [
       'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
     description: 'Lighthouse Coast Sea',
   },
+   {
+    preview:
+      'https://cdn.pixabay.com/photo/2021/01/21/09/11/mountains-5936682__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2021/01/21/09/11/mountains-5936682_1280.jpg',
+    description: 'Mountains, River, Banff, Trees, Forest, Conifers',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2021/03/16/11/31/pencils-6099511__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2021/03/16/11/31/pencils-6099511_1280.jpg',
+    description: 'Pencils, Colored Pencils, Art, Draw',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2021/02/07/09/11/lake-5990540__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2021/02/07/09/11/lake-5990540_1280.jpg',
+    description: 'Lake, Pier, Sunset, Sunrise, Silhouette',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2021/01/06/07/33/fisherman-5893401__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2021/01/06/07/33/fisherman-5893401_1280.jpg',
+    description: 'Fisherman, Lake, Water, Ripples, Fishing',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2020/11/12/16/58/worker-5736096__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2020/11/12/16/58/worker-5736096_1280.jpg',
+    description: 'Worker, Grinder, Factory, Workplace',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2020/07/08/10/17/car-5383371__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2020/07/08/10/17/car-5383371_1280.jpg',
+    description: 'Car, Sunlight, Forest, Road, Street',
+  },
 ];
 
