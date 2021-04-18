@@ -64,6 +64,7 @@ function addImageAtributes(atribut) {
 function removeImageAtributes() {
   lightboxImage.src = "";
   lightboxImage.alt = "";
+  document.body.removeAttribute('Style');
 };
 
 // додає клас модалці
